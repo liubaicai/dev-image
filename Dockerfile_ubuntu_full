@@ -1,0 +1,31 @@
+FROM ubuntu:20.04
+
+LABEL liubaicai "liushuai.baicai@hotmail.com"
+
+RUN sed -i s@/archive.ubuntu.com/@/mirrors.aliyun.com/@g /etc/apt/sources.list && apt-get update && \
+    apt-get install -y locales tzdata software-properties-common && \
+    locale-gen en_US.UTF-8 && \
+    ln -fs /usr/share/zoneinfo/Asia/Shanghai /etc/localtime && \
+    dpkg-reconfigure --frontend noninteractive tzdata && \
+    add-apt-repository ppa:longsleep/golang-backports -y && \
+    apt-add-repository ppa:brightbox/ruby-ng -y && \
+    apt-get install -y curl git net-tools iputils-ping vim openssh-server gcc make \
+    libpcre3 libpcre3-dev zlib1g-dev libssl-dev libyaml-dev libgdbm-dev \
+    libqdbm-dev libreadline-dev libncurses5-dev libpq-dev libffi-dev \
+    python3-pip golang-go ruby2.7 ruby2.7-dev && \
+    apt-get clean && rm -rf /var/lib/apt/lists/*
+
+RUN bash -c "$(curl -fsSL https://raw.githubusercontent.com/ohmybash/oh-my-bash/master/tools/install.sh)"
+
+COPY ubuntu_scripts /scripts/
+ENV PATH="/scripts:${PATH}"
+
+RUN bash /scripts/install-docker.sh && rm /scripts/install-docker.sh
+RUN bash /scripts/install-nginx.sh && rm /scripts/install-nginx.sh
+RUN bash /scripts/install-node.sh && rm /scripts/install-node.sh
+
+WORKDIR /root
+COPY entrypoint_ubuntu_full.sh /usr/local/bin/entrypoint.sh
+RUN chmod +x /usr/local/bin/entrypoint.sh
+
+ENTRYPOINT ["/usr/local/bin/entrypoint.sh"]

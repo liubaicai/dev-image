@@ -1,1 +1,0 @@
-docker run -ti --rm --privileged --name ubuntu-dev -v /d/ws:/workspace -p 8888:8080 ubuntu-dev
