@@ -95,4 +95,4 @@ docker run -d \
 ## Docker Hub
 
 - 标准版: `liubaicai/dev`
-- 桌面版: `liubaicai/dev-desktop` (待发布)
+- 桌面版: `liubaicai/dev-desktop`
