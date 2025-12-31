@@ -1,8 +1,9 @@
-FROM ubuntu:20.04
+FROM debian:12
 
-LABEL liubaicai "liushuai.baicai@hotmail.com"
+LABEL author="liubaicai <liushuai.baicai@hotmail.com>"
 
-RUN sed -i s@/archive.ubuntu.com/@/mirrors.aliyun.com/@g /etc/apt/sources.list && apt-get update && \
+RUN sed -i 's/deb.debian.org/mirrors.aliyun.com/g' /etc/apt/sources.list.d/debian.sources && \
+    apt-get update && \
     apt-get install -y locales tzdata && \
     locale-gen en_US.UTF-8 && \
     ln -fs /usr/share/zoneinfo/Asia/Shanghai /etc/localtime && \
@@ -12,11 +13,13 @@ RUN sed -i s@/archive.ubuntu.com/@/mirrors.aliyun.com/@g /etc/apt/sources.list &
 
 RUN bash -c "$(curl -fsSL https://raw.githubusercontent.com/ohmybash/oh-my-bash/master/tools/install.sh)"
 
-COPY ubuntu_scripts /scripts/
-ENV PATH="/scripts:${PATH}"
+RUN curl -fsSL https://deb.nodesource.com/setup_22.x | bash - && \
+    apt-get install -y nodejs && \
+    apt-get clean && rm -rf /var/lib/apt/lists/*
 
-WORKDIR /root
-COPY entrypoint_ubuntu.sh /usr/local/bin/entrypoint.sh
+COPY entrypoint.sh /usr/local/bin/entrypoint.sh
 RUN chmod +x /usr/local/bin/entrypoint.sh
+
+WORKDIR /root/workspace
 
 ENTRYPOINT ["/usr/local/bin/entrypoint.sh"]
