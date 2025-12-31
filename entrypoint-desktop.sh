@@ -37,4 +37,5 @@ echo "===> VNC server started. Connect using VNC viewer to <host>:5901"
 echo "===> VNC password: ${VNC_PASSWORD}"
 echo "===> SSH is also available on port 22"
 
-exec /bin/bash
+# 保持容器运行
+tail -f /dev/null
