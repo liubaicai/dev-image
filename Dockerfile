@@ -9,6 +9,7 @@ RUN sed -i 's/deb.debian.org/mirrors.aliyun.com/g' /etc/apt/sources.list.d/debia
     ln -fs /usr/share/zoneinfo/Asia/Shanghai /etc/localtime && \
     dpkg-reconfigure --frontend noninteractive tzdata && \
     apt-get install -y curl git net-tools iputils-ping vim openssh-server && \
+    apt-get install -y build-essential python3 python3-pip make && \
     apt-get clean && rm -rf /var/lib/apt/lists/*
 
 RUN bash -c "$(curl -fsSL https://raw.githubusercontent.com/ohmybash/oh-my-bash/master/tools/install.sh)"

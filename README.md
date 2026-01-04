@@ -36,12 +36,15 @@ docker run -d \
 - ✅ SSH 服务器
 - ✅ Git、Curl、Vim 等基础工具
 - ✅ Node.js 22.x
+- ✅ Python 3 (包含 pip)
+- ✅ 构建工具 (build-essential, make)
 - ✅ Oh My Bash
 - ✅ 中国时区 (Asia/Shanghai)
 - ✅ 使用阿里云镜像源加速
 - ✅ SSH 服务自动启动
 - ✅ 自动生成 SSH 密钥对
 - ✅ 持久化工作目录 /root/workspace
+- ✅ 支持 Node.js 原生模块编译
 
 ## 端口说明
 
