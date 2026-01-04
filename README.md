@@ -37,6 +37,7 @@ docker run -d \
 - ✅ Git、Curl、Vim 等基础工具
 - ✅ Node.js 22.x
 - ✅ Python 3 (包含 pip)
+- ✅ Go 1.25.5 (支持 amd64/arm64)
 - ✅ 构建工具 (build-essential, make)
 - ✅ Oh My Bash
 - ✅ 中国时区 (Asia/Shanghai)
